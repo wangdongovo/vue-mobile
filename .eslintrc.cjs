@@ -9,7 +9,11 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  "vue/multi-word-component-names": ["error", {
+    "ignores": []
+  }],
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+  
 }

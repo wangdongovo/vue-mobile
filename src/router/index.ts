@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/home/index.vue'
+import NotFound from '@/views/not-found/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,13 +11,35 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
+      path: '/me',
+      name: 'me',
+      //路线级代码拆分
+      //这将为此路由生成一个单独的chunk（About.[hash].js）
+      //其在访问该路线时是惰性加载的。
+      component: () => import('@/views/me/index.vue')
+    },
+
+    {
+      path: '/dynamic',
+      name: 'dynamic',
+      component: () => import('@/views/dynamic/index.vue')
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: () => import('@/views/dynamic/detail/index.vue'),
+      meta: {
+        hideNav: true
+      }
+    },
+
+    { 
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: NotFound,
+      meta: {
+        hideNav: true
+      } }
   ]
 })
 

@@ -1,24 +1,37 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
   <RouterView />
+  <van-tabbar v-model="active" active-color="#ee0a24" route v-if="navType">
+    <van-tabbar-item replace to="/" icon="home-o">首页</van-tabbar-item>
+    <van-tabbar-item replace to="/dynamic" icon="search">动态</van-tabbar-item>
+    <van-tabbar-item replace to="/me" icon="friends-o">我的</van-tabbar-item>
+  </van-tabbar>
 </template>
+
+
+<script setup lang="ts">
+import { RouterView, useRoute } from 'vue-router'
+import { ref, watch, computed } from 'vue'
+const active = ref(0)
+const navType = computed(() => {
+  // 在这里根据当前路由的meta字段来判断是否显示底部导航
+  return !route.meta.hideNav;
+})
+
+const route = useRoute()
+
+watch(
+  () => route.name,
+  (to, from) => {
+    // 在这里处理路由变化的逻辑
+    console.log('路由发生变化', route.meta);
+    console.log('当前路由的查询参数：', to);
+    console.log('上一个路由的查询参数：', from);
+  },
+  { deep: true }
+);
+
+
+</script>
 
 <style scoped>
 header {
