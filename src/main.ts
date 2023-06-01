@@ -6,6 +6,7 @@ import "amfe-flexible"
 
 import App from './App.vue'
 import router from './router'
+import '@/permission'
 
 const app = createApp(App)
 

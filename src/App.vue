@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
-import { ref, watch, computed } from 'vue'
+import { ref, computed } from 'vue'
 const active = ref(0)
 const navType = computed(() => {
   // 在这里根据当前路由的meta字段来判断是否显示底部导航
@@ -18,17 +18,6 @@ const navType = computed(() => {
 })
 
 const route = useRoute()
-
-watch(
-  () => route.name,
-  (to, from) => {
-    // 在这里处理路由变化的逻辑
-    console.log('路由发生变化', route.meta);
-    console.log('当前路由的查询参数：', to);
-    console.log('上一个路由的查询参数：', from);
-  },
-  { deep: true }
-);
 
 
 </script>
